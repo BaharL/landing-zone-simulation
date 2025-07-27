@@ -1,71 +1,69 @@
 # -*- coding: utf-8 -*-
 '''
-I Caponians, una specie aliena proviente da un non ben specificato
-pianeta della galassia, stanno pianificando da un bel po' l'invasione
-del pianeta Terra. Per farlo, hanno creato e installato in vari punti
-del pianeta varie *mind bending machine*, macchine che riducono
-l'intelligenza degli umani attraverso la rete telefonica [1].
+The Caponians, an alien strain coming from an unspecified planet in
+the galaxy, have been planning for quite a while the invasion of the
+planet Earth. To do this, they have created and installed in various
+points of the planet "mind bending machines". This machinery reduces
+the intelligence of humans through the telephone network [1].
 
-Terminata la fase di riduzione dell'intelligenza umana, il prossimo
-passo verso la conquista della Terra sara' lo sbarco sul nostro
-pianeta, che avverra' non appena i Caponians avranno trovato dei punti
-sufficientemente spaziosi per far atterrare le loro astronavi.
+Once the phase of reducing human intelligence is over, the next
+step towards the conquest of the Earth will be the landing on our
+planet, which will happen as soon as the Caponians will find some
+areas where they can land with their spaceships.
 
-Un'astronave vista dall'alto puo' essere rappresentata come un
-rettangolo di dimensioni W (larghezza) e H (altezza). Nel considerare
-lo spazio necessario ad un'astronave per atterrare vanno pero' aggiunti
-sui 4 lati del rettangolo 4 aree in piu'. Le aree in piu' sono una una
-per lato.
-Le aree sporgono tutte di una stessa quantita' D, per permettere di
-aprire su ogni lato un portellone di sbarco. Ogni portellone e' quindi
-largo quanto il lato dell'astronave su cui si trova e lungo D, su
-qualunque lato si trovi.
+A spaceship (seen from above) can be represented as a rectangle of
+dimensions W (width) and H (height). When considering the necessary
+space for landing, a spaceship will open hatches on the 4 sides of
+the rectangle. These gates are one per side.
 
-I Caponians vorrebbero sbarcare con le loro astronavi in alcune nostre
-citta', di cui hanno scaricato le rispettive mappe. Una citta' puo'
-essere rappresentata come un'immagine rettangolare nera, in cui ogni
-palazzo e' rappresentato come un rettangolo colorato (ogni palazzo ha
-un colore che lo identifica univocamente).
+The areas protrude by the same amount D, in order to allow to open on
+each side a landing hatch. Each hatch is therefore as wide as the side
+of the spaceship on which it is located and long as D, whatever side
+it is on.
 
-Per definire gli ultimi dettagli del piano di sbarco, i Caponians
-hanno bisogno di un algoritmo che, data la mappa di una citta' e un
-elenco di astronavi definite come sopra, confermi oppure no se
-ciascuna astronave ha abbastanza spazio per atterrare in quella citta',
-aprire i suoi 4 portelloni e sbarcare il suo contenuto. Le astronavi
-non atterrano contemporaneamente nella citta', quindi vanno valutate
-separatamente le une rispetto alle altre.
+The Caponians would like to land with their spaceships in some of our
+cities by looking at the city map. A city can be represented as a black
+rectangular image, in which every building is represented as a colored
+rectangle (each building has a color that uniquely identifies it).
 
-(1) Quindi, data un'immagine nera (citta') con dei rettangoli colorati
-pieni (palazzi) disegnati sopra, con ogni rettangolo di un colore
-diverso da tutti gli altri, bisognera':
+In order to define the final details of the landing plan, the Caponians
+need an algorithm which, given a map of a city and a
+list of spaceships, confirms or not if
+each spaceship has enough space to land in that city.
+To land, a spaceship has to open its 4 hatches. Spaceships do not land
+in the city at the same time, so they must be evaluated separately
+from each other.
 
-- determinare posizione, dimensioni e colore di ogni rettangolo
-- salvare in un file di testo un rettangolo per riga
-- nel file, ogni rettangolo e' rappresentato con una sequenza di 7 valori:
+(1) So, given a black image (city) filled with solid colored
+rectangles (buildings), where each building has its own unique color,
+it is necessary:
+
+- determine position, size and color of each rectangle
+- save in a text file one rectangle per line
+- in the file, each rectangle is represented with a sequence of 7 values:
      x, y, w, h, r, g, b
-  separati da virgole, in ordine di coordinata y (numero di riga)
-  decrescente e, a parimerito, di x (pixel della riga) crescente.
+  separated by commas, in order of decreasing y-coordinate (the row
+  nunber). In case of equal y, in order of increasing x (row-pixel number).
 
-(2) Successivamente, e' dato un file di testo contente N terne di
-interi.  Ogni terna separata internamente e dalle altre terne da un
-qualunque numero di spazi, tabulazioni o ritorni a capo. Ogni terna
-rappresenta larghezza W, altezza H e distanza minima D (vedere sotto)
-di un rettangolo (astronave) che si vorrebbe aggiungere all'immagine
-al punto (1):
+(2) Next, we are given a text file containing N triple of
+integers. Each triple is separated internally and from the other
+triples by a variable number of spaces, tabs or carriage returns. Each
+triple represents width W, height H and minimum distance D (see below)
+of a spaceship that you would like to land in a city at step (1):
 
-- restituire una lista di N valori booleani, l'i-esimo valore nella
-lista e' True se nell'immagine c'e' abbastanza spazio per inserire
-l'i-esimo rettangolo
+- So we have to return a list of N Boolean values: the i-th value in
+the list is True if there is enough space in the image to
+insert the i-th spaceship.
 
-- un rettangolo puo' essere inserito nell'immagine se esiste almeno una
-posizione nell'immagine in cui c'e' abbastanza spazio (cioe' un'area
-costituita interamente da pixel neri) per contenere il rettangolo
-stesso, piu' le 4 "estensioni" del rettangolo, ossia i 4 portelloni
-dell'astronave.
+- a rectangle can be inserted in the image if there exists at least
+one position in the image where there is enough space (i.e., an area
+consisting entirely of black pixels) to hold the i-th spaceship.
+A spaceship can land if contains the rectangle itself, plus the 4
+"extensions" of the rectangle, i.e. the 4 hatches of the spaceship.
 
-Ad esempio, se un'astronave da inserire ha 2 pixel di
-larghezza e 3 di altezza e D = 2, bisognera' cercare uno spazio
-nell'immagine adatto a contenere la seguente figura:
+For example, if a spaceship has 2 pixels of width and 3 of height and
+D = 2, we will have to look for an area in the image to contain the
+following figure:
 
                               **
                               **
@@ -75,13 +73,13 @@ nell'immagine adatto a contenere la seguente figura:
                               **
                               **
 
-in cui i simboli + sono i pixel del rettangolo/astronave 2x3 e i *
-sono i pixel delle 4 estensioni/portelloni
+where the + symbols are the pixels of the 2x3 rectangle/spaceship and the *
+are the pixels of the 4 extensions/hatches.
 
-Esempio:
-Data la seguente immagine rappresentata con un carattere per ogni
-pixel, dove "." e' un pixel nero mentre caratteri diversi da "." sono
-pixel colorati (*=rosso, +=verde):
+Example:
+Given the following image represented with one character for each
+pixel, where "." is a black pixel and characters other than "." are
+colored pixels (*=red, +=green):
 
 **....
 **....
@@ -90,12 +88,11 @@ pixel colorati (*=rosso, +=verde):
 ....++
 ....++
 
-Il file con i rettangoli trovati da voi salvato deve contenere le
-righe:
+The file with the found rectangles  must contain the lines:
 4,4,2,2,0,255,0
 0,0,2,2,255,0,0
 
-e dati le seguenti astronavi:
+and given the following spaceships:
 
 (3, 3, 0)
 (2, 2, 4)
@@ -103,9 +100,9 @@ e dati le seguenti astronavi:
 (4, 2, 1)
 (2, 4, 1)
 
-verra' restituita la lista: [True, False, False, False, False]
-infatti solo la prima astronave puo' atterrare ad esempio nella
-zona marcata da 'X' (non ha sportelloni, infatti D = 0)
+the returned list will be: [True, False, False, False, False].
+In fact only the first spaceship can land for example in the zone marked by
+'X' (it has no doors, in fact D = 0)
 
 **.XXX
 **.XXX
@@ -114,20 +111,12 @@ zona marcata da 'X' (non ha sportelloni, infatti D = 0)
 ....++
 ....++
 
-mentre le altre non entrano nella mappa perche', pur avendo un punto
-in cui possono atterrare, non possono aprire tutti i portelloni
+while the others don't enter in the map because, even if they have a point
+in which they can land, they cannot open all the hatches.
 
 
 [1] https://en.wikipedia.org/wiki/Zak_McKracken_and_the_Alien_Mindbenders)
 '''
-
-#from pngmatrix import load_png8
-
-#def ex(file_png, file_txt, file_out):
-    #pass
-
-#if __name__ == "__main__":
-    #pass
 from pngmatrix import load_png8
 
 def parse_numbers_from_file(file_txt):
